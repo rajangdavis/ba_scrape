@@ -52,8 +52,9 @@ let totalPages = files.map(file => {
 
 console.log(JSON.stringify(totalPages)) 
 
-// 3,762,008 beers
+// 197,500 beers
 // 311,334 pages of ratings
+// 3,762,008 ratings
 
 // // Grabbing the counts from the DOM
 // // Need to refactor to use the
