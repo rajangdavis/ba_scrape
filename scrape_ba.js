@@ -76,33 +76,8 @@ const init = async ()=>{
 }
 
 init().then((result)=>{
-	// console.log(result)
+	
 }).catch((error)=>{
 	console.log("There was an error:")
 	console.log(error)
 })
-
-
-
-
-// Get list of beers
-	// Get name
-	// Link
-	// Style
-// Then the beer pages
-	// Figure out how many reviews to get
-
-// Probably don't need
-// Data structures for each page
-
-// const firstPageData = {
-// 	"url": `${BASE_URL}/place/directory/0/US/`,
-// 	"selector" : "#ba-content table table:nth-of-type(1) tr td a"
-// }
-
-// const beerListData = stateLink =>{
-// 	return {
-// 		"url": `${BASE_URL}${stateLink.attribs.href}`,
-// 		"selector" : "#ba-content table table:nth-of-type(1) tr td a"
-// 	}
-// }

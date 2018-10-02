@@ -1,2 +1,4 @@
 node_modules/
-socialmediadata-beeradvocate/
+breweries/
+brew_pages.json
+breweries.json

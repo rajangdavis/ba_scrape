@@ -1,0 +1,32 @@
+sequelize model:generate --name Brewery --attributes name:string, address:string, city:string, state:string, website:string, latitude:float, longitude:float, ba_link:string
+sequelize model:generate --name Beer --attributes # beer attributes
+sequelize model:generate --name Style --attributes abvRange:string, ibuRange:string, glassware:string, description:text
+
+
+sequelize seed:generate --name brewery-up
+sequelize seed:generate --name beer-up
+sequelize seed:generate --name style-up
+
+
+
+
+// Associations
+
+	// Brewery.hasMany(Beer, {as: 'Beers'})
+	// Brewery.hasMany(Ratings, {as: 'BeerRatings', through:Beer})
+	
+	// Beer.belongsTo(Brewery)
+	// Beer.hasMany(Rating, {as: "Ratings"})
+	// Beer.hasOne(Style, {as: "Style"})
+
+
+	// Style.hasMany(Beer, {as: "Beers"})
+
+
+
+
+
+// Stretch goals
+sequelize model:generate --name Rating --attributes # scores for ratings attributes, text if present
+	// Rating.belongsTo(Beer)
+	// Rating.hasOne(Brewery, {through:Beer})
