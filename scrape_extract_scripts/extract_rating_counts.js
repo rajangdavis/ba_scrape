@@ -3,7 +3,8 @@ const fs = require("fs")
 // for getting the sums
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 // This is the directory of json files
-const dir = `./breweries`
+const dir = `${__dirname}/../scrape_extract_data/breweries`
+
 // Get a list of files from the folder
 const files = fs.readdirSync(dir).map(x => `${dir}/${x}`);
 
@@ -37,28 +38,27 @@ const mapPages = (brewery) =>{
 // get the count of the ratings
 // add them up to get the total
 // number of ratings
-let totalPages = files.map(file => {
+
+
+let pagesByBrewery = {}
+
+files.map(file => {
 	let contents = JSON.parse(fs.readFileSync(file));
 	if(contents.length > 0){
-		return contents.map((brew, i) => {
-			let hash = {};
-			hash[brew.name + i] = mapPages(brew)
-			return hash
+		let breweryName = contents[0].brewery_name;
+		if(!(breweryName in pagesByBrewery)){
+			pagesByBrewery[breweryName] = []
+		}
+		contents.map(beer =>{
+			pagesByBrewery[breweryName].push(beer)
 		})
 	}else{
 		return 0
 	}
-}).filter(x => x != 0)
+})
 
-console.log(JSON.stringify(totalPages)) 
+console.log(pagesByBrewery)
 
 // 197,500 beers
 // 311,334 pages of ratings
 // 3,762,008 ratings
-
-// // Grabbing the counts from the DOM
-// // Need to refactor to use the
-// // Cheerio API
-// const getReviewCounts = ()=>{
-// 	return parseInt($("div b")[17].innerText.replace(" Ratings: ","").replace(",",""))
-// }

@@ -1,4 +1,2 @@
 node_modules/
-breweries/
-brew_pages.json
-breweries.json
+*.json

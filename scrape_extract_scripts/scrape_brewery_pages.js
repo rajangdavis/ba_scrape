@@ -36,7 +36,7 @@ const fetchBreweryPage = async (brewery, breweryId) =>{
 		beerRatings.push(beerObj)
 	})
 
-	let cleanFile = `./breweries/${breweryId}.json`
+	let cleanFile = `${__dirname}/../scrape_extract_data/breweries/${breweryId}.json`
 
 	return await fs_writeFile(cleanFile,JSON.stringify(beerRatings))
 }

@@ -1,6 +1,6 @@
 const axios = require("axios")
 const cheerio = require("cheerio")
-const {getBreweryLinkForState, dissectPagination} = require("./clean_text.js")
+const { getBreweryLinkForState, dissectPagination } = require("../utils/clean_text.js")
 
 const BASE_URL = "https://www.beeradvocate.com"
 

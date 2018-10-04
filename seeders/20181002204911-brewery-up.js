@@ -1,4 +1,4 @@
-const breweries = require("../breweries.json")
+const breweries = require("../scrape_extract_data/breweries.json")
 'use strict';
 
 module.exports = {

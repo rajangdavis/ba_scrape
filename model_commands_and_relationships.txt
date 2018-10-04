@@ -1,11 +1,46 @@
-# Kind of dumb, but the attributes cannot have spaces between the commas
-sequelize model:generate --name Brewery --attributes name:string,address:string,city:string,state:string,website:string,latitude:float,longitude:float,ba_link:string
-sequelize model:generate --name Style --attributes abvRange:string,ibuRange:string,glassware:string,description:text
-sequelize model:generate --name Beer --attributes name:string,abv:float,ratings_count:integer,total_score:float
+# Special bash command
+alias pg='PGPASSWORD=$PG_PASS psql -U postgres'
+alias sequelize='./node_modules/.bin/sequelize'
+alias db_reset='sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all'
 
-sequelize seed:generate --name brewery-up
-sequelize seed:generate --name beer-up
-sequelize seed:generate --name style-up
+
+
+
+# Installing PostGIS
+pg -d craft_beer_development -c "CREATE EXTENSION postgis;"
+pg -d yourdatabase -c "CREATE EXTENSION fuzzystrmatch"
+pg -d yourdatabase -c "CREATE EXTENSION postgis_tiger_geocoder;"
+
+
+
+
+
+# Create database
+sequelize db:create
+
+# Migrate database
+sequelize db:migrate
+
+# Seed database (all of the seeds)
+sequelize db:seed:all
+
+
+
+
+
+# Drop database
+sequelize db:drop
+
+# Generating models
+
+	# Kind of dumb, but the attributes cannot have spaces between the commas
+	sequelize model:generate --name Brewery --attributes name:string,address:string,city:string,state:string,website:string,latitude:float,longitude:float,ba_link:string
+	sequelize model:generate --name Style --attributes abvRange:string,ibuRange:string,glassware:string,description:text
+	sequelize model:generate --name Beer --attributes name:string,abv:float,ratings_count:integer,total_score:float
+
+	sequelize seed:generate --name brewery-up
+	sequelize seed:generate --name beer-up
+	sequelize seed:generate --name style-up
 
 
 

@@ -8,6 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      name: {
+        type: Sequelize.STRING
+      },
+      baLink: {
+        type: Sequelize.STRING
+      },
       abvRange: {
         type: Sequelize.STRING
       },

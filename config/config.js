@@ -6,7 +6,14 @@ module.exports = {
     password: env.PG_PASS,
     database: "craft_beer_development",
     host: "127.0.0.1",
-    dialect: "postgres"
+    dialect: "postgres",
+    define: {
+      underscored: false,
+      freezeTableName: false,
+      syncOnAssociation: true,
+      charset: 'utf8',
+      collate: 'utf8_general_ci'
+    }
   },
   test: {
     username: "root",
@@ -25,6 +32,13 @@ module.exports = {
     ssl: true,
     dialectOptions: {
         ssl: true
+    },
+    define: {
+      underscored: false,
+      freezeTableName: false,
+      syncOnAssociation: true,
+      charset: 'utf8',
+      collate: 'utf8_general_ci',
     }
   }
 };
