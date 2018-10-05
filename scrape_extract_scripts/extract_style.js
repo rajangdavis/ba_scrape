@@ -2,7 +2,7 @@ const fs = require("fs")
 const {uniqBy} = require("lodash")
 
 // This is the directory of json files
-const dir = `${__dirname}/../scrape_extract_data/breweries`
+const dir = `${__dirname}/../scrape_extract_data/beers_by_brewery`
 // Get a list of files from the folder
 const files = fs.readdirSync(dir).map(x => `${dir}/${x}`);
 

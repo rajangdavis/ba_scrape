@@ -1,0 +1,17 @@
+summary statistics for user ratings
+	- average ratings
+	- standard deviation
+	- min
+	- max
+	- count of ratings
+
+user ratings will be extremely useful
+
+=> ratings based on user similarity
+
+
+Compare against 'Beer Advocate Reviews (only scores)'
+	=> beers with 100 ratings
+
+Beer Advocate Reviews (scores with text)
+	=> beers with 100 ratings

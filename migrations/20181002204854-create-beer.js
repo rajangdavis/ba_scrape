@@ -11,20 +11,29 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
+      brewery_link: {
+        type: Sequelize.STRING
+      },
+      style_link: {
+        type: Sequelize.STRING
+      },
+      ba_link: {
+        type: Sequelize.STRING
+      },
       abv: {
         type: Sequelize.FLOAT
       },
-      ratings_count: {
+      rating_counts: {
         type: Sequelize.INTEGER
       },
       total_score: {
         type: Sequelize.FLOAT
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }

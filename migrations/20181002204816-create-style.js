@@ -11,13 +11,13 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      baLink: {
+      ba_link: {
         type: Sequelize.STRING
       },
-      abvRange: {
+      abv_range: {
         type: Sequelize.STRING
       },
-      ibuRange: {
+      ibu_range: {
         type: Sequelize.STRING
       },
       glassware: {
@@ -26,11 +26,11 @@ module.exports = {
       description: {
         type: Sequelize.TEXT
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }

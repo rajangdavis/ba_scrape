@@ -1,6 +1,6 @@
 const axios = require("axios")
 const cheerio = require("cheerio")
-const data = require("./breweries.json")
+const data = require("../scrape_extract_data/breweries.json")
 const fs = require('fs');
 const util = require('util')
 const fs_writeFile = util.promisify(fs.writeFile)
@@ -8,7 +8,7 @@ const fs_writeFile = util.promisify(fs.writeFile)
 const BASE_URL = "https://www.beeradvocate.com"
 
 // Gets all of the beer scores
-// for a given brewry page
+// for a given brewery page
 const fetchBreweryPage = async (brewery, breweryId) =>{
 	let breweryHtml = await axios.get(brewery.link)
 	let breweryPageHtml = cheerio.load(breweryHtml.data)
@@ -36,7 +36,7 @@ const fetchBreweryPage = async (brewery, breweryId) =>{
 		beerRatings.push(beerObj)
 	})
 
-	let cleanFile = `${__dirname}/../scrape_extract_data/breweries/${breweryId}.json`
+	let cleanFile = `${__dirname}/../scrape_extract_data/beer_by_brewery/${breweryId}.json`
 
 	return await fs_writeFile(cleanFile,JSON.stringify(beerRatings))
 }

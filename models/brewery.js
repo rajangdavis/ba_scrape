@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     website: DataTypes.STRING,
     latitude: DataTypes.FLOAT,
     longitude: DataTypes.FLOAT,
-    baLink: DataTypes.STRING
+    ba_link: DataTypes.STRING
   }, {});
   Brewery.associate = function(models) {
     Brewery.hasMany(models.Beer, {as: 'Beers'})

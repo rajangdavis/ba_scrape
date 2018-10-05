@@ -1,5 +1,5 @@
 const breweries = require("../scrape_extract_data/breweries.json")
-'use strict';
+const fs = require("fs")
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -8,20 +8,31 @@ module.exports = {
       // Return a promise to correctly handle asynchronicity.
 
       // Example:
-      return queryInterface.bulkInsert('Breweries', breweries.map(brewery =>{
+      return queryInterface.bulkInsert('Breweries', breweries.map( (brewery) =>{
+        let breweryId = parseInt(brewery.link.split("/")[5])
+        let cleanFile = `${__dirname}/../scrape_extract_data/brewery_geo_latlong/${breweryId}.json`
+        
+        try {
+          var file = fs.readFileSync(cleanFile, 'utf8')
+          var geometry = JSON.parse(file).results[0].geometry
+        }
+        catch(err) {
+          console.log(`File does not exist for ${brewery.name}`)
+        }
+
         return {
           name: brewery.name,  
-          phoneNumber: brewery.phone_number,
+          phone_number: brewery.phone_number,
           address: (brewery.address == undefined ? "" : brewery.address), 
           city: brewery.city, 
           state: brewery.state,
           country: brewery.country,
           zipcode: brewery.zipcode,
           website: "",
-          baLink: brewery.link,
+          ba_link: brewery.link,
           features: brewery.features,
-          createdAt: new Date(),
-          updatedAt: new Date()
+          created_at: new Date(),
+          updated_at: new Date()
         }
       }), {});
     

@@ -1,4 +1,4 @@
-const styles = require("../scrape_extract_data/styles_final.json")
+const beers = require("../scrape_extract_data/flat_beer_list.json")
 'use strict';
 
 module.exports = {
@@ -8,14 +8,15 @@ module.exports = {
       // Return a promise to correctly handle asynchronicity.
     
       // Example:
-      return queryInterface.bulkInsert('Styles', styles.map(style =>{
+      return queryInterface.bulkInsert('Beers', beers.map(beer =>{
         return {
-          name: style.name,  
-          ba_link: style.baLink,
-          description: style.description,
-          abv_range: style.abvRange,
-          ibu_range: style.ibuRange,
-          glassware: style.glassware,
+          name: beer.name,
+          ba_link: beer.link,
+          style_link: beer.style_link,
+          brewery_link: beer.brewery_link,
+          abv: beer.abv,
+          rating_counts: beer.rating_counts,
+          total_score: beer.total_score,
           created_at: new Date(),
           updated_at: new Date()
         }
@@ -26,8 +27,8 @@ module.exports = {
     
       // Add reverting commands here.
       // Return a promise to correctly handle asynchronicity.
-    
+
       // Example:
-      return queryInterface.bulkDelete('Styles', null, {});
+      return queryInterface.bulkDelete('Beers', null, {});
   }
 };

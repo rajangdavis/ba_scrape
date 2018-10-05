@@ -1,10 +1,9 @@
 const fs = require("fs")
 
-// for getting the sums
+// for getting sums
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 // This is the directory of json files
-const dir = `${__dirname}/../scrape_extract_data/breweries`
-
+const dir = `${__dirname}/../scrape_extract_data/beer_by_brewery`
 // Get a list of files from the folder
 const files = fs.readdirSync(dir).map(x => `${dir}/${x}`);
 
@@ -17,9 +16,9 @@ const ratingsPageCounts = num =>{
 
 // Creates an array of URL's
 // that are paginated
-const mapPages = (brewery) =>{
-	let currentPage = brewery.link
-	let reviewCounts = parseInt(brewery.rating_counts)
+const mapPages = (beer) =>{
+	let currentPage = beer.link
+	let reviewCounts = parseInt(beer.rating_counts)
 	let numPages = ratingsPageCounts(reviewCounts)
 	var pages = []
 	for(let i = 0; i < numPages; i++){
@@ -32,33 +31,47 @@ const mapPages = (brewery) =>{
 	return pages;
 }
 
+var beerCount = beerRatings = beerPages = 0
+var pagesByBrewery = {}
+const MAX_RATINGS = 25
 // Loop over each file
 // open the file
+// get the total number of beers
 // loop through the beers
 // get the count of the ratings
-// add them up to get the total
-// number of ratings
+// get the number of pages I need
+	// to scrape
+// get the total number of reviews
 
-
-let pagesByBrewery = {}
-
-files.map(file => {
+files.map(file =>{
 	let contents = JSON.parse(fs.readFileSync(file));
 	if(contents.length > 0){
 		let breweryName = contents[0].brewery_name;
 		if(!(breweryName in pagesByBrewery)){
 			pagesByBrewery[breweryName] = []
 		}
+		beerCount += contents.length
 		contents.map(beer =>{
-			pagesByBrewery[breweryName].push(beer)
+
+			// if(parseInt(beer.rating_counts) >= MAX_RATINGS){
+			// 	beer.rating_counts = MAX_RATINGS
+			// }
+
+			beerRatings += parseInt(beer.rating_counts)
+			beerPages += ratingsPageCounts(parseInt(beer.rating_counts)) 
+			pagesByBrewery[breweryName].push(mapPages(beer))
 		})
-	}else{
-		return 0
 	}
 })
 
-console.log(pagesByBrewery)
-
 // 197,500 beers
-// 311,334 pages of ratings
+console.log(`Total Beer Count is: ${beerCount}`)
 // 3,762,008 ratings
+console.log(`Total Beer Ratings is: ${beerRatings}`)
+// 311,334 pages of ratings
+console.log(`Total Pages to scrape is: ${beerPages}`)
+
+setTimeout(function(){
+	// Links I need to scrape
+	console.log(pagesByBrewery)
+}, 6000)

@@ -11,7 +11,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      phoneNumber: {
+      phone_number: {
         type: Sequelize.STRING
       },
       address: {
@@ -41,14 +41,14 @@ module.exports = {
       features: {
         type: Sequelize.STRING
       },
-      baLink: {
+      ba_link: {
         type: Sequelize.STRING
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
