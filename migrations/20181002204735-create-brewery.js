@@ -32,11 +32,8 @@ module.exports = {
       website: {
         type: Sequelize.STRING
       },
-      latitude: {
-        type: Sequelize.FLOAT
-      },
-      longitude: {
-        type: Sequelize.FLOAT
+      position: {
+        type: Sequelize.GEOMETRY('POINT', 3785),
       },
       features: {
         type: Sequelize.STRING

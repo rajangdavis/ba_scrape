@@ -1,7 +1,7 @@
 # Special bash command
 alias pg='PGPASSWORD=$PG_PASS psql -U postgres'
 alias sequelize='./node_modules/.bin/sequelize'
-alias db_reset='sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all'
+alias db_reset='sequelize db:drop && sequelize db:create && pg -d craft_beer_development -c "CREATE EXTENSION postgis; set client_encoding to 'UTF8';" && sequelize db:migrate && sequelize db:seed:all'
 
 
 
@@ -10,7 +10,7 @@ alias db_reset='sequelize db:drop && sequelize db:create && sequelize db:migrate
 pg -d craft_beer_development -c "CREATE EXTENSION postgis;"
 pg -d yourdatabase -c "CREATE EXTENSION fuzzystrmatch"
 pg -d yourdatabase -c "CREATE EXTENSION postgis_tiger_geocoder;"
-set client_encoding to 'UTF8';
+
 
 
 

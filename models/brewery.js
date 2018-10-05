@@ -6,8 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     website: DataTypes.STRING,
-    latitude: DataTypes.FLOAT,
-    longitude: DataTypes.FLOAT,
+    position: DataTypes.FLOAT,
     ba_link: DataTypes.STRING
   }, {});
   Brewery.associate = function(models) {
