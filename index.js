@@ -5,10 +5,10 @@ const Sequelize = require('sequelize')
 const env = process.env;
 
 const sequelize = new Sequelize(
-    env("POSTGRES_DB_NAME"),
-    env("POSTGRES_USER"),
-    env("POSTGRES_PASSWORD"), {
-    dialect: "postgres"
+    env["POSTGRES_DB_NAME"],
+    env["POSTGRES_USER"],
+    env["POSTGRES_PASSWORD"], {
+    dialect: "postgres",
     port: 5432
 });
 
@@ -26,8 +26,22 @@ const app = express();
 // app.use(cache('168 hours'));
 const server = http.createServer(app);
   
+
+const queryResults = async (query)=>{
+  try{
+    console.log(query)
+    return await sequelize.query(query, { type: sequelize.QueryTypes.SELECT})
+  }catch(err){
+    console.log(err)
+  }
+}
+
 app.get('/', async (req, res, next) => {
-  console.log(req);
+  if(req.query){
+    let results = await queryResults(req.query)
+    console.log(results)
+  }
+  res.send('hello world CHANGED')
 });
  
 app.use(function notFoundMiddleware(req, res, next) {
