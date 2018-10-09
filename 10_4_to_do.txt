@@ -15,3 +15,12 @@ Compare against 'Beer Advocate Reviews (only scores)'
 
 Beer Advocate Reviews (scores with text)
 	=> beers with 100 ratings
+
+Schedule meeting with Dave
+	=> 
+
+T-Stochastic Neighborhood Embedding
+TSNE plots
+
+Pretrained word vectors for beers?
+- Latent Semantic Analysis
