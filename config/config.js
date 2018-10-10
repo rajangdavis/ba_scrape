@@ -23,6 +23,8 @@ let finalConfig = {
   }
 };
 
+console.log(env.DATABASE_URL)
+
 if(env.DATABASE_URL == undefined){
     finalConfig.development = {
       username: "postgres",
