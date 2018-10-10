@@ -1,27 +1,7 @@
 const env = process.env
 
-module.exports = {
-  development: {
-    username: "postgres",
-    password: env.PG_PASS,
-    database: "craft_beer_development",
-    host: "127.0.0.1",
-    dialect: "postgres",
-    define: {
-      underscored: false,
-      freezeTableName: false,
-      syncOnAssociation: true,
-      charset: 'utf8',
-      collate: 'utf8_general_ci'
-    }
-  },
-  test: {
-    username: "root",
-    password: null,
-    database: "craft_beer_test",
-    host: "127.0.0.1",
-    dialect: "postgres"
-  },
+
+let finalConfig = {
   production: {
     // username: env.DB_USERNAME,
     // password: env.DB_PASSWORD,
@@ -42,3 +22,29 @@ module.exports = {
     }
   }
 };
+
+if(env.DATABASE_URL == undefined){
+    finalConfig.development = {
+      username: "postgres",
+      password: env.PG_PASS,
+      database: "craft_beer_development",
+      host: "127.0.0.1",
+      dialect: "postgres",
+      define: {
+        underscored: false,
+        freezeTableName: false,
+        syncOnAssociation: true,
+        charset: 'utf8',
+        collate: 'utf8_general_ci'
+      }
+    },
+    finalConfig.test = {
+      username: "root",
+      password: null,
+      database: "craft_beer_test",
+      host: "127.0.0.1",
+      dialect: "postgres"
+    }
+}
+
+module.exports = finalConfig;
