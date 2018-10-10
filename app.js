@@ -1,24 +1,10 @@
 const http = require('http');
 const express = require('express');
 const apicache = require('apicache');
-const Sequelize = require('sequelize')
+const {sequelize} = require("./models/index.js")
+
 const env = process.env;
 
-const sequelize = new Sequelize(
-    env["POSTGRES_DB_NAME"],
-    env["POSTGRES_USER"],
-    env["POSTGRES_PASSWORD"], {
-    dialect: "postgres",
-    port: 5432
-});
-
-sequelize
-    .authenticate()
-    .then(function(err) {
-        console.log('Connection has been established successfully.');
-    }, function (err) { 
-        console.log('Unable to connect to the database:', err);
-    });
 
 apicache.options({debug:true});
 const cache = apicache.middleware; 
@@ -37,7 +23,7 @@ const queryResults = async (query)=>{
 }
 
 app.get('/', async (req, res, next) => {
-  if(req.query){
+  if(req.query!=undefined){
     let results = await queryResults(req.query)
     console.log(results)
   }

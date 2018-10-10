@@ -22,10 +22,12 @@ let finalConfig = {
     }
   }
 };
+
 console.log("Setting configs")
 console.log(`database URL is ${env.DATABASE_URL}`)
 
 if(env.DATABASE_URL == undefined){
+  console.log("Accessed")
     finalConfig.development = {
       username: "postgres",
       password: env.PG_PASS,
