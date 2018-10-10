@@ -1,12 +1,5 @@
 const breweries = require("../scrape_extract_data/breweries.json")
 const fs = require("fs")
-const point = coords =>{
-  return {
-    type: 'Point',
-    coordinates: [parseFloat(coords.lat),parseFloat(coords.lng)],
-    crs: { type: 'name', properties: { name: 'EPSG:4326'}}
-  }
-}
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -22,7 +15,7 @@ module.exports = {
         try {
           var file = fs.readFileSync(cleanFile, 'utf8')
           let geometry = JSON.parse(file).results[0].geometry
-          brewery.position = file ?  Sequelize.fn('ST_GeomFromText', `POINT(${geometry.lat} ${geometry.lng})`, '3785') : undefined
+          brewery.position = file ?  Sequelize.fn('ST_GeomFromText', `POINT(${geometry.lat} ${geometry.lng})`, 3785) : undefined
         }
         catch(err) {
           if(err.syscall!="open"){
@@ -34,7 +27,7 @@ module.exports = {
         return {
           name: brewery.name,  
           phone_number: brewery.phone_number,
-          address: (brewery.address == undefined ? "" : brewery.address), 
+          address: brewery.address,
           city: brewery.city, 
           state: brewery.state,
           country: brewery.country,

@@ -8,8 +8,6 @@ alias db_reset='sequelize db:drop && sequelize db:create && pg -d craft_beer_dev
 
 # Installing PostGIS
 pg -d craft_beer_development -c "CREATE EXTENSION postgis;"
-pg -d yourdatabase -c "CREATE EXTENSION fuzzystrmatch"
-pg -d yourdatabase -c "CREATE EXTENSION postgis_tiger_geocoder;"
 
 
 
