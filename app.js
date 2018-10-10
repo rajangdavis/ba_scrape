@@ -1,15 +1,9 @@
 const http = require('http');
 const express = require('express');
-const apicache = require('apicache');
 const {sequelize} = require("./models/index.js")
-
 const env = process.env;
 
-
-apicache.options({debug:true});
-const cache = apicache.middleware; 
 const app = express();
-// app.use(cache('168 hours'));
 const server = http.createServer(app);
   
 
@@ -23,24 +17,13 @@ const queryResults = async (query)=>{
 }
 
 app.get('/', async (req, res, next) => {
-  if(req.query!=undefined){
+  res.setHeader('Content-Type', 'application/json');
+  if(req.query != ""){
     let results = await queryResults(req.query)
-    console.log(results)
+    res.send(JSON.stringify(results))
+  }else{
+    res.send(JSON.stringify({error: "Must send a valid query"}))
   }
-  res.send('hello world CHANGED')
-});
- 
-app.use(function notFoundMiddleware(req, res, next) {
-  next(Object.assign(new Error('Not Found'), { status: 404 }));
-});
- 
-app.use((err, req, res, _next) => {
-  const { name, message, status = 500 } = err;
-  if (status >= 500) {
-    console.error(err);
-  }
-  res.status(status);
-  res.json({ name, message, status });
 });
  
 server.listen(process.env.PORT || 3000, () => {
