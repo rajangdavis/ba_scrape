@@ -22,8 +22,8 @@ let finalConfig = {
     }
   }
 };
-
-console.log(env.DATABASE_URL)
+console.log("Setting configs")
+console.log(`database URL is ${env.DATABASE_URL}`)
 
 if(env.DATABASE_URL == undefined){
     finalConfig.development = {
